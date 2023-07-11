@@ -18,12 +18,12 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, password, name, lastName, birthDate, address, numberAddress, city, state, cellphone } = req.body;
+        const { email, password, name, lastName, birthDate, address, numberAddress, complement, city, state, cellphone } = req.body;
         const existingUser = yield User_1.User.findOne({ where: { email: email } });
         if (existingUser) {
             return res.status(400).json({ error: "E-mail já cadastrado" });
         }
-        const hashPassword = yield bcrypt_1.default.hash(password, 12);
+        const hashPassword = yield bcrypt_1.default.hash(password, 10);
         const user = yield User_1.User.create({
             email,
             password: hashPassword,
@@ -32,14 +32,15 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             birthDate,
             address,
             numberAddress,
+            complement,
             city,
             state,
             cellphone,
         });
-        return res.status(201).json({ message: 'Usuário registrado com sucesso!' });
+        return res.status(201).json({ message: 'Usuário registrado com sucesso!', user: user });
     }
     catch (err) {
-        console.error(err);
+        console.error(`O erro está sendo ${err}`);
         return res.status(500).json({ error: "Erro no registro de usuário" });
     }
 });
