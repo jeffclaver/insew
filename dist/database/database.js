@@ -8,8 +8,5 @@ exports.database = new sequelize_1.Sequelize({
     port: 5432,
     database: 'insew_development',
     username: 'insew',
-    password: 'In5eW#2023!',
-    define: {
-        underscored: true
-    }
+    password: 'In5eW#2023!'
 });

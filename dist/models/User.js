@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const sequelize_1 = require("sequelize");
 const database_1 = require("../database/database");
-exports.User = database_1.database.define("User", {
+exports.User = database_1.database.define("users", {
     id: {
         allowNull: false,
         autoIncrement: true,
@@ -38,6 +38,10 @@ exports.User = database_1.database.define("User", {
     numberAddress: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
+    },
+    complement: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
     },
     city: {
         type: sequelize_1.DataTypes.STRING,
